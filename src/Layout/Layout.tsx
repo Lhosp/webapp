@@ -18,7 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Outlet } from 'react-router-dom';
-// import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems, secondaryListItems } from './ListItems';
 
 function Copyright(props: any) {
   return (
@@ -141,9 +141,9 @@ export default function Layout() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {/* {mainListItems} */}
+            {mainListItems}
             <Divider sx={{ my: 1 }} />
-            {/* {secondaryListItems} */}
+            {secondaryListItems}
           </List>
         </Drawer>
         <Box
