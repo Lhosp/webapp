@@ -11,6 +11,8 @@ import Client from "./Pages/Client";
 import Fournisseur from "./Pages/Fournisseur";
 import Setting from "./Pages/Setting";
 import Profile from "./Pages/Profile";
+import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         </Route>
         <Route path="/setting" element={<Setting />}></Route>
         <Route path="/profile" element={<Profile/>}></Route>
+        <Route path="/signin" element={<SignIn/>}></Route>
+        <Route path="/signup" element={<SignUp/>}></Route>
       </Routes>
     </BrowserRouter>
   );
