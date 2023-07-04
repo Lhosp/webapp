@@ -11,27 +11,35 @@ import Client from "./Pages/Client";
 import Fournisseur from "./Pages/Fournisseur";
 import Setting from "./Pages/Setting";
 import Profile from "./Pages/Profile";
-import SignIn from "./Pages/SignIn";
+import SignIn from "./Pages/login";
 import SignUp from "./Pages/SignUp";
-
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./Redux/Reducer";
+import { Provider } from "react-redux";
+const store = configureStore({
+  reducer: rootReducer,
+  devTools: true,
+});
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/projets" element={<Projets />}></Route>
-          <Route path="/devis" element={<Devis />}></Route>
-          <Route path="/clients" element={<Client />}></Route>
-          <Route path="/articles" element={<Article />}></Route>
-          <Route path="/fournisseurs" element={<Fournisseur/>}></Route>
-        </Route>
-        <Route path="/setting" element={<Setting />}></Route>
-        <Route path="/profile" element={<Profile/>}></Route>
-        <Route path="/signin" element={<SignIn/>}></Route>
-        <Route path="/signup" element={<SignUp/>}></Route>
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/home" element={<Home />}></Route>
+            <Route path="/projets" element={<Projets />}></Route>
+            <Route path="/devis" element={<Devis />}></Route>
+            <Route path="/clients" element={<Client />}></Route>
+            <Route path="/articles" element={<Article />}></Route>
+            <Route path="/fournisseurs" element={<Fournisseur />}></Route>
+          </Route>
+          <Route path="/setting" element={<Setting />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/signin" element={<SignIn />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
