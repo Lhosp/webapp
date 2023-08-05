@@ -1,14 +1,25 @@
-import { UserAction } from "../../Types/reducer";
-import { LOGIN } from "../Action/user";
+import { ActionFromReducer, AnyAction } from "redux";
+import { User } from "../../Types/user";
 
 const initialState = {
-  user: { name: "", email: "" },
+  email: "",
+  password: "",
+  status: false,
+  message: "",
+  token: "",
 };
 
-export default function userReducer(state = initialState, action: UserAction) {
+export default function userReducer(state = initialState, action: AnyAction) {
   switch (action.type) {
-    case LOGIN:
-      return action.payload;
+    // omit other reducer cases
+    case "USER_LOGGED_IN":
+        return { ...state, status: true };
+    case "USER_LOGIN": {
+      if(localStorage.getItem("token")){
+        state.status=true;
+      }
+      return ({ state } = action.payload);
+    }
     default:
       return state;
   }

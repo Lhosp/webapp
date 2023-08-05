@@ -14,10 +14,12 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-
+import NightlightOutlinedIcon from "@mui/icons-material/NightlightOutlined";
 import { Outlet } from "react-router-dom";
 import { mainListItems, secondaryListItems } from "./ListItems";
-
+import { maintheme, secondarytheme } from "./Theme";
+import { ImageListItem, Switch } from "@mui/material";
+import { Label } from "@mui/icons-material";
 
 const drawerWidth: number = 240;
 
@@ -69,20 +71,23 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
-
 export default function Layout() {
   const [open, setOpen] = React.useState(true);
+  const [theme, setTheme] = React.useState(maintheme);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  const handleThemechange = (event: React.FormEvent): void => {
+    return theme === maintheme ? setTheme(secondarytheme) : setTheme(maintheme);
+    throw new Error("Function not implemented.");
+  };
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="fixed" open={open}>
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
@@ -112,6 +117,7 @@ export default function Layout() {
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
+          <img src="../images/abri.png" alt=""></img>
           <Toolbar
             sx={{
               display: "flex",
@@ -130,6 +136,14 @@ export default function Layout() {
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
           </List>
+          <Divider />
+
+          <Switch
+            defaultChecked
+            size="medium"
+            onClick={handleThemechange}
+            icon={<NightlightOutlinedIcon />}
+          ></Switch>
         </Drawer>
         <Box
           component="main"
@@ -144,7 +158,7 @@ export default function Layout() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container disableGutters sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               <Outlet />
             </Grid>
